@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
 
 import '../components/styling/global.css';
 import '../assets/vendor/nucleo/css/nucleo.css';

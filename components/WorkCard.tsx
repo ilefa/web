@@ -39,6 +39,11 @@ export const Technologies = [
             name: 'Redis',
             icon: 'mdi mdi-layers',
             color: 'danger'
+        },
+        FIREBASE: {
+            name: 'Firebase',
+            icon: 'mdi mdi-firebase',
+            color: 'warning'
         }
     }
 ][0];
@@ -47,9 +52,8 @@ export const Technologies = [
 const repositoryKeywords = (link: string) => {
     if (!link.startsWith('https://github.com/')
             && !link.startsWith('https://gitlab.com/')
-            && !link.startsWith('https://bitbucket.org/')) {
+            && !link.startsWith('https://bitbucket.org/'))
         return link;
-    }
 
     return link.split(/(http|https):\/\/(github|gitlab|bitbucket).(com|org)/)[4].substring(1);
 };
