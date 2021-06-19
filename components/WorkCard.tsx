@@ -20,6 +20,11 @@ export const Technologies = [
             icon: 'mdi mdi-language-typescript',
             color: 'blue'
         },
+        NEXT: {
+            name: 'NextJS',
+            icon: 'mdi mdi-react',
+            color: 'darker'
+        },
         REACT: {
             name: 'React',
             icon: 'mdi mdi-react',
@@ -38,7 +43,7 @@ export const Technologies = [
         REDIS: {
             name: 'Redis',
             icon: 'mdi mdi-layers',
-            color: 'danger'
+            color: 'red'
         },
         FIREBASE: {
             name: 'Firebase',
@@ -170,7 +175,7 @@ export const WorkCard = (props: WorkCardProps) => {
             <div className="card-footer">
                 {
                     tech.map(element => 
-                        <Badge color={element.color} pill key={element.name} className={styles.technologyBadge}>
+                        <Badge color={element.color} key={element.name} className={styles.technologyBadge}>
                             <i className={element.icon + ' fa-fw ' + styles.projectCardIcon}></i> {element.name} 
                         </Badge>
                     )

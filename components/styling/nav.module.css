@@ -17,3 +17,17 @@
 .navLink i {
     font-size: 1rem;
 }
+
+.navBrandMobileText {
+    font-family: 'Roboto Mono', monospace !important;
+    font-weight: 600 !important;
+}
+
+.navBrandMobileCloser {
+    vertical-align: top !important;
+}
+
+.navLink i {
+    font-size: 1rem;
+    margin-right: 5px;
+}

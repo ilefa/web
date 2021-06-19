@@ -6,23 +6,26 @@ export type TaglineResponse = {
     } | null;
     isLoading: boolean;
     isError: boolean;
+    regenerate: () => void;
 }
 
 export const useTagline = (): TaglineResponse => {
 
     const fetcher = (url: string) => fetch(url).then(r => r.json());
-    const { data, error } = useSWR('/api/tagline', fetcher);
+    const req = useSWR('/api/tagline', fetcher);
 
-    if (data) return {
-        data,
+    if (req.data) return {
+        data: req.data,
         isLoading: false,
-        isError: false
+        isError: false,
+        regenerate: () => req.revalidate()
     }
 
     return {
         data: null,
-        isLoading: !data && !error,
-        isError: error
+        isLoading: !req.data && !req.error,
+        isError: req.error,
+        regenerate: () => req.revalidate()
     }
 
 }

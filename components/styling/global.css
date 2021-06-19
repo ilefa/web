@@ -8,6 +8,10 @@
     font-size: 1.2rem;
 }
 
+.cursor {
+    cursor: pointer !important;
+}
+
 .dev-notice {
     background-color: #66A7C5;
     color: #fff;

@@ -1,6 +1,8 @@
 import styles from '../components/styling/home.module.css';
 import workStyles from '../components/styling/work.module.css';
 
+import { useTagline } from '../hooks';
+
 import {
     Footer,
     IconCardGlyph,
@@ -9,9 +11,7 @@ import {
     WorkCard
 } from '../components';
 
-import { useTagline } from '../hooks';
-
-const ACRONYMS = [
+const FALLBACK_ACRONYMS = [
     'Ivy League Educated Financial Advisors',
     'Intricate Legendary Economists of Financial Agencies',
     'Intellectual Liquidation Earned by Finding Annuity',
@@ -49,6 +49,16 @@ const PROJECTS: PartialProject[] = [
         ]
     },
     {
+        key: 'cobalt',
+        headerText: 'Cobalt',
+        description: 'A suite of better course tools built by UConn students, for UConn students.',
+        link: 'https://cobalt.ilefa.club',
+        tech: [
+            Technologies.TS,
+            Technologies.NEXT
+        ]
+    },
+    {
         key: 'donthelpme',
         headerText: 'donthelpme',
         description: 'A simple Firefox extension that removes the pesky help button that overlaps test cases in Mimir.',
@@ -62,7 +72,7 @@ const PROJECTS: PartialProject[] = [
 const random = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
 
 const HomePage = () => {
-    const { data, isLoading, isError } = useTagline();
+    const { data, isLoading, isError, regenerate } = useTagline();
     return (
         <main>
             <Nav/>
@@ -85,13 +95,13 @@ const HomePage = () => {
                                 {
                                     isError && (
                                         <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
-                                            { random(ACRONYMS) }
+                                            { random(FALLBACK_ACRONYMS) }
                                         </h2>
                                     )
                                 }
                                 {
                                     !!data && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
+                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase shine cursor`} onClick={regenerate}>
                                             { data!.tagline }
                                         </h2>
                                     )
