@@ -23,13 +23,11 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
                 <meta property="og:url" content="https://ilefa.club/" />
                 <meta property="og:title" content="ILEFA Labs" />
                 <meta property="og:description" content="We are ILEFA - what started as a couple of college freshman interested in the stonk market has become a strong development group focused on creating software that connects people." />
-                <meta property="og:image" content="/logo.png" />
 
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://ilefa.club/" />
                 <meta property="twitter:title" content="ILEFA Labs" />
                 <meta property="twitter:description" content="We are ILEFA - what started as a couple of college freshman interested in the stonk market has become a strong development group focused on creating software that connects people." />
-                <meta property="twitter:image" content="/logo.png" />
 
                 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
                 <link rel="manifest" href="/manifest.json" />
