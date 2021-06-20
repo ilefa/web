@@ -74,7 +74,7 @@ export const Nav = () => {
                                     <li className="nav-item" key={element.key}>
                                         <Link href={element.href}>
                                             <a className={`nav-link ${styles.navLink}`}>
-                                                <i className={`${element.icon} fa-fw`}></i> {element.name ?? ''}
+                                                <i className={`${element.icon} fa-fw`}></i> {/*element.name ?? ''*/}
                                             </a>
                                         </Link>
                                     </li>

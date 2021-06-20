@@ -1,7 +1,16 @@
+import MdiIcon from '@mdi/react';
 import styles from '../components/styling/home.module.css';
 import workStyles from '../components/styling/work.module.css';
 
 import { useTagline } from '../hooks';
+
+import {
+    mdiHammerWrench,
+    mdiLeaf,
+    mdiPuzzle,
+    mdiSchool,
+    mdiVectorUnion
+} from '@mdi/js';
 
 import {
     Footer,
@@ -23,6 +32,7 @@ type PartialProject = {
     headerText: string;
     archived?: boolean;
     description: string;
+    icon?: JSX.Element;
     link?: string;
     tech: any[];
 }
@@ -32,17 +42,18 @@ const PROJECTS: PartialProject[] = [
         key: 'ivy',
         headerText: 'Ivy',
         description: 'A versatile Discord.js-based TypeScript framework for building Discord bots.',
+        icon: <MdiIcon path={mdiLeaf} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://github.com/ilefa/ivy',
         tech: [
             Technologies.TS,
-            Technologies.REDIS,
-            Technologies.FIREBASE
+            Technologies.REDIS
         ]
     },
     {
         key: 'husky',
         headerText: 'Husky',
         description: 'A useful collection of utilities pertaining to various UConn services.',
+        icon: <MdiIcon path={mdiSchool} size="18px" className={`${styles.workCardIcon} fa-fw mr-2`} />,
         link: 'https://github.com/ilefa/husky',
         tech: [
             Technologies.TS
@@ -52,6 +63,7 @@ const PROJECTS: PartialProject[] = [
         key: 'cobalt',
         headerText: 'Cobalt',
         description: 'A suite of better course tools built by UConn students, for UConn students.',
+        icon: <MdiIcon path={mdiVectorUnion} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://cobalt.ilefa.club',
         tech: [
             Technologies.TS,
@@ -59,9 +71,20 @@ const PROJECTS: PartialProject[] = [
         ]
     },
     {
+        key: 'common',
+        headerText: 'Common',
+        description: 'A comprehensive set of various utilities that make writing TypeScript projects easier.',
+        icon: <MdiIcon path={mdiHammerWrench} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
+        link: 'https://github.com/ilefa/common',
+        tech: [
+            Technologies.TS
+        ]
+    },
+    {
         key: 'donthelpme',
         headerText: 'donthelpme',
         description: 'A simple Firefox extension that removes the pesky help button that overlaps test cases in Mimir.',
+        icon: <MdiIcon path={mdiPuzzle} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://github.com/ilefa/donthelpme',
         tech: [
             Technologies.JS
@@ -142,8 +165,8 @@ const HomePage = () => {
                                     {
                                         PROJECTS.map(project => (
                                             <WorkCard
+                                                icon={project.icon}
                                                 key={project.key}
-                                                useIcon={false}
                                                 headerText={project.headerText}
                                                 headerColor={'text-primary-light'}
                                                 archived={project.archived}

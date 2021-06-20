@@ -152,3 +152,9 @@
     width: 350px;
     height: 300px;
 }
+
+.workCardIcon {
+    vertical-align: baseline;
+    margin-bottom: -2px;
+    margin-right: 5px;
+}

@@ -72,9 +72,8 @@ const getIconForLink = (link: string) => {
 }
 
 export interface WorkCardProps {
-    icon?: string;
+    icon?: JSX.Element;
     iconColor?: string;
-    useIcon?: boolean;
     headerText?: string;
     headerColor?: string;
     archived?: boolean;
@@ -83,10 +82,8 @@ export interface WorkCardProps {
     tech?: any[];
 }
 
-export const WorkCard = (props: WorkCardProps) => {
-    let icon = props.icon || 'fa fa-exclamation-triangle';
-    let iconColor = props.iconColor || 'bg-primary';
-    let useIcon = props.useIcon === undefined ? true : props.useIcon;
+export const WorkCard: React.FC<WorkCardProps> = props => {
+    let icon = props.icon;
     let headerText = props.headerText || 'Generic Project';
     let headerColor = props.headerColor || 'text-primary';
     let archived = props.archived === undefined ? false : props.archived;
@@ -107,16 +104,7 @@ export const WorkCard = (props: WorkCardProps) => {
         <div className={`card shadow shadow-lg--hover mt-5 ${cardStyles.rgCardSm}`}>
             <div className="card-body">
                 <div className="d-flex">
-                    {
-                        useIcon && (
-                            <div>
-                                <div className={`icon icon-shape ${iconColor} rounded-circle text-white`}>
-                                    <i className={icon}></i>
-                                </div>
-                            </div>
-                        )
-                    }
-                    <div className={useIcon ? 'pl-4' : ''}>
+                    <div>
                         {
                             link !== 'no-link-provided' && (
                                 <h5>
@@ -125,7 +113,7 @@ export const WorkCard = (props: WorkCardProps) => {
                                         className={`${cardStyles.cardSectionTitle} ${headerColor}`}
                                         target="_blank"
                                         rel="noopener noreferrer">
-                                            {headerText}
+                                            {icon ?? ''}{headerText}
                                     </a>
                                 </h5>
                             )
@@ -135,7 +123,7 @@ export const WorkCard = (props: WorkCardProps) => {
                             link === 'no-link-provided' && (
                                 <h5>
                                     <span className={`${cardStyles.cardSectionTitle} ${headerColor} cursor-pointer`}>
-                                            {headerText}
+                                        {icon ?? ''}{headerText}
                                     </span>
                                 </h5>
                             )
