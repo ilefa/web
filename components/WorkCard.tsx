@@ -164,7 +164,7 @@ export const WorkCard: React.FC<WorkCardProps> = props => {
                 {
                     tech.map(element => 
                         <Badge color={element.color} key={element.name} className={styles.technologyBadge}>
-                            <i className={element.icon + ' fa-fw ' + styles.projectCardIcon}></i> {element.name} 
+                            <i className={element.icon + ' fa-fw mr-1' + styles.projectCardIcon}></i> {element.name} 
                         </Badge>
                     )
                 }

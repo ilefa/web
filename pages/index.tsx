@@ -130,7 +130,7 @@ const HomePage = () => {
                                     )
                                 }
                                 <div className="btn-wrapper mt-4">
-                                <a href="https://github.com/ilefa" className="btn btn-dark btn-icon mt-3 mb-sm-0 text-lowercase">
+                                <a href="https://github.com/ilefa" className="btn btn-dark bg-ilefa-dark btn-icon mt-3 mb-sm-0 shine text-lowercase">
                                     <span className="btn-inner--icon"><i className="fab fa-github"></i></span>
                                     <span className="btn-inner--text">Visit us on GitHub</span>
                                 </a>
@@ -141,7 +141,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                <section className={`section section-lg ${styles.sectionSeperator} background-circuits`}>
+                <section className={`section section-lg ${styles.sectionSeparator} background-circuits`}>
                     <div className="container" id="body">
                         <IconCardGlyph 
                                 title="A little about us"

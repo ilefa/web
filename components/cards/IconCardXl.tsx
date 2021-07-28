@@ -1,29 +1,29 @@
-import styles from './styling/card.module.css';
+import styles from '../styling/card.module.css';
 
 import { ReactElement } from 'react';
 
-export interface IconCardProps {
-    icon: string;
+export interface IconCardXlProps {
+    icon?: string;
     iconColor?: string;
-    headerText: string;
+    headerText?: string;
     headerHref?: string;
-    headerColor?: string;
     headerShine?: boolean;
+    headerColor?: string;
     content: ReactElement | string;
 }
 
-export const IconCard: React.FC<IconCardProps> = props => {
+export const IconCardXl: React.FC<IconCardXlProps> = props => {
     let icon = props.icon || 'fa fa-exclamation-triangle';
     let iconColor = props.iconColor || 'bg-primary';
     let headerText = props.headerText || 'Icon Card';
     let headerHref = props.headerHref || undefined;
-    let headerColor = props.headerColor || 'text-primary';
     let headerShine = props.headerShine || false;
-    let content = props.content || <></>;
+    let headerColor = props.headerColor || 'text-primary';
+    let content = props.content || 'Icon Card Content';
 
     return (
-        <div className="col-lg-6 order-lg-1 d-flex align-items-stretch">
-            <div className="card shadow shadow-lg--hover mt-5 rg-card-sm">
+        <div className="col-lg-12 align-items-stretch">
+            <div className={`card shadow shadow-lg--hover mt-5 ${styles.rgCard}`}>
                 <div className="card-body">
                     <div className="d-flex px-3">
                         <div>

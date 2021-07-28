@@ -12,7 +12,8 @@
 }
 
 .technologyBadge {
-    margin-right: 3px;
+    margin-right: 4px;
+    text-transform: lowercase !important;
 }
 
 .cardDeckFlex > div {

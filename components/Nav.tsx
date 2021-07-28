@@ -55,7 +55,7 @@ export const Nav = () => {
                             <div className="row">
                                 <div className="col-6 collapse-brand">
                                     <Link href="/">
-                                    <a className={`navbar-collapse-title text-success ${styles.navBrandMobileText}`}>
+                                    <a className={`navbar-collapse-title text-primary ${styles.navBrandMobileText}`}>
                                         ILEFA Labs
                                     </a>
                                     </Link>
@@ -74,7 +74,7 @@ export const Nav = () => {
                                     <li className="nav-item" key={element.key}>
                                         <Link href={element.href}>
                                             <a className={`nav-link ${styles.navLink}`}>
-                                                <i className={`${element.icon} fa-fw`}></i> {/*element.name ?? ''*/}
+                                                <i className={`${element.icon} fa-fw`}></i> {element.name}
                                             </a>
                                         </Link>
                                     </li>

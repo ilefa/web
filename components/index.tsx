@@ -1,7 +1,8 @@
 export * from './Footer';
-export * from './IconCard';
-export * from './IconCardContainer';
-export * from './IconCardGlyph';
-export * from './IconCardXl';
 export * from './Nav';
 export * from './WorkCard';
+
+export * from './cards/IconCard';
+export * from './cards/IconCardContainer';
+export * from './cards/IconCardGlyph';
+export * from './cards/IconCardXl';
