@@ -9,6 +9,8 @@ import {
     mdiLeaf,
     mdiPuzzle,
     mdiSchool,
+    mdiStarThreePointsOutline,
+    mdiTableClock,
     mdiVectorUnion
 } from '@mdi/js';
 
@@ -39,11 +41,33 @@ type PartialProject = {
 
 const PROJECTS: PartialProject[] = [
     {
-        key: 'ivy',
-        headerText: 'Ivy',
-        description: 'A versatile Discord.js-based TypeScript framework for building Discord bots.',
-        icon: <MdiIcon path={mdiLeaf} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
-        link: 'https://github.com/ilefa/ivy',
+        key: 'cobalt',
+        headerText: 'Cobalt',
+        description: 'A suite of better course tools built by UConn students, for UConn students.',
+        icon: <MdiIcon path={mdiVectorUnion} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
+        link: 'https://cobalt.ilefa.club',
+        tech: [
+            Technologies.TS,
+            Technologies.NEXT
+        ]
+    },
+    {
+        key: 'snapshots',
+        headerText: 'Snapshots',
+        description: 'The definitive collection of semester-wise data pertaining to UConn.',
+        icon: <MdiIcon path={mdiTableClock} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
+        link: 'https://snapshots.ilefa.club',
+        tech: [
+            Technologies.TS,
+            Technologies.NEXT
+        ]
+    },
+    {
+        key: 'foundary',
+        headerText: 'Foundary',
+        description: 'A hyper-customizable task runner equipped for containerized workloads - coming soon.',
+        icon: <MdiIcon path={mdiStarThreePointsOutline} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
+        // link: 'https://foundary.ilefa.club',
         tech: [
             Technologies.TS,
             Technologies.REDIS
@@ -53,28 +77,28 @@ const PROJECTS: PartialProject[] = [
         key: 'husky',
         headerText: 'Husky',
         description: 'A useful collection of utilities pertaining to various UConn services.',
-        icon: <MdiIcon path={mdiSchool} size="18px" className={`${styles.workCardIcon} fa-fw mr-2`} />,
+        icon: <MdiIcon path={mdiSchool} size="19px" className={`${styles.workCardIcon} fa-fw mr-2`} />,
         link: 'https://github.com/ilefa/husky',
         tech: [
             Technologies.TS
         ]
     },
     {
-        key: 'cobalt',
-        headerText: 'Cobalt',
-        description: 'A suite of better course tools built by UConn students, for UConn students.',
-        icon: <MdiIcon path={mdiVectorUnion} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
-        link: 'https://cobalt.ilefa.club',
+        key: 'ivy',
+        headerText: 'Ivy',
+        description: 'A versatile Discord.js-based TypeScript framework for building Discord bots.',
+        icon: <MdiIcon path={mdiLeaf} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
+        link: 'https://github.com/ilefa/ivy',
         tech: [
             Technologies.TS,
-            Technologies.NEXT
+            Technologies.REDIS
         ]
     },
     {
         key: 'common',
         headerText: 'Common',
         description: 'A comprehensive set of various utilities that make writing TypeScript projects easier.',
-        icon: <MdiIcon path={mdiHammerWrench} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
+        icon: <MdiIcon path={mdiHammerWrench} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://github.com/ilefa/common',
         tech: [
             Technologies.TS
@@ -84,7 +108,7 @@ const PROJECTS: PartialProject[] = [
         key: 'donthelpme',
         headerText: 'donthelpme',
         description: 'A simple Firefox extension that removes the pesky help button that overlaps test cases in Mimir.',
-        icon: <MdiIcon path={mdiPuzzle} size="18px" className={`${styles.workCardIcon} fa-fw`} />,
+        icon: <MdiIcon path={mdiPuzzle} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://github.com/ilefa/donthelpme',
         tech: [
             Technologies.JS
@@ -180,7 +204,7 @@ const HomePage = () => {
                             </div>
                     </div>
                 </section>
-                <Footer white={true} />
+                <Footer className="background-circuits" white />
             </div>
         </main>
     );

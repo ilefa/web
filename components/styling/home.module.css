@@ -4,7 +4,7 @@
 }
 
 .pageHeader {
-    margin-top: 20px;
+    margin-top: 60px;
 }
 
 .sectionSeparator {
@@ -156,5 +156,5 @@
 .workCardIcon {
     vertical-align: baseline;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 8px;
 }
