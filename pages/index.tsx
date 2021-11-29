@@ -2,7 +2,16 @@ import MdiIcon from '@mdi/react';
 import styles from '../components/styling/home.module.css';
 import workStyles from '../components/styling/work.module.css';
 
-import { useTagline } from '../hooks';
+import { useEffect, useState } from 'react';
+import { useLocalStorage, useTagline } from '../hooks';
+
+import {
+    Footer,
+    IconCardGlyph,
+    Nav,
+    Technologies,
+    WorkCard
+} from '../components';
 
 import {
     mdiHammerWrench,
@@ -14,13 +23,7 @@ import {
     mdiVectorUnion
 } from '@mdi/js';
 
-import {
-    Footer,
-    IconCardGlyph,
-    Nav,
-    Technologies,
-    WorkCard
-} from '../components';
+export type ThemeMode = 'colorful' | 'dark';
 
 const FALLBACK_ACRONYMS = [
     'Ivy League Educated Financial Advisors',
@@ -120,10 +123,19 @@ const random = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
 
 const HomePage = () => {
     const { data, isLoading, isError, regenerate } = useTagline();
+    const [storedTheme, setStoredTheme] = useLocalStorage<ThemeMode>('theme', 'colorful');
+    const [currentTheme, setCurrentTheme] = useState<ThemeMode>(null as any);
+
+    const themeToggler = () => storedTheme === 'colorful'
+        ? setStoredTheme('dark')
+        : setStoredTheme('colorful');
+
+    useEffect(() => setCurrentTheme(storedTheme), [storedTheme]);
+
     return (
         <main>
-            <Nav/>
-            <div className={`position-relative background-gradient`}>
+            <Nav theme={currentTheme} themeToggler={themeToggler} />
+            <div className={`position-relative background-gradient-${currentTheme}`}>
                 <div className="section section-hero section-shaped background-circuits">
                     <div className="shape shape-style-3 shape-default"></div>
                     <div className={styles.pageHeader}>
