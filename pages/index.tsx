@@ -2,8 +2,8 @@ import MdiIcon from '@mdi/react';
 import styles from '../components/styling/home.module.css';
 import workStyles from '../components/styling/work.module.css';
 
+import { useLocalStorage } from '../hooks';
 import { useEffect, useState } from 'react';
-import { useLocalStorage, useTagline } from '../hooks';
 
 import {
     Footer,
@@ -122,7 +122,6 @@ const PROJECTS: PartialProject[] = [
 const random = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
 
 const HomePage = () => {
-    const { data, isLoading, isError, regenerate } = useTagline();
     const [storedTheme, setStoredTheme] = useLocalStorage<ThemeMode>('theme', 'colorful');
     const [currentTheme, setCurrentTheme] = useState<ThemeMode>(null as any);
 
@@ -138,42 +137,27 @@ const HomePage = () => {
             <div className={`position-relative background-gradient-${currentTheme}`}>
                 <div className="section section-hero section-shaped background-circuits">
                     <div className="shape shape-style-3 shape-default"></div>
-                    <div className={styles.pageHeader}>
-                        <div className="container shape-container d-flex align-items-center py-lg">
-                        <div className="col px-0">
-                            <div className="row align-items-center justify-content-center">
-                            <div className="col-lg-6 text-center">
-                                <h1 className={`${styles.nameTitle} text-white display-1`}>ILEFA Labs</h1>
-                                {
-                                    isLoading && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
-                                            <i className="fa fa-spinner fa-spin fa-fw"></i>
-                                        </h2>
-                                    )
-                                }
-                                {
-                                    isError && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
-                                            { random(FALLBACK_ACRONYMS) }
-                                        </h2>
-                                    )
-                                }
-                                {
-                                    !!data && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase shine cursor`} onClick={regenerate}>
-                                            { data!.tagline }
-                                        </h2>
-                                    )
-                                }
-                                <div className="btn-wrapper mt-4">
-                                <a href="https://github.com/ilefa" className="btn btn-dark bg-ilefa-dark btn-icon mt-3 mb-sm-0 shine text-lowercase">
-                                    <span className="btn-inner--icon"><i className="fab fa-github"></i></span>
-                                    <span className="btn-inner--text">Visit us on GitHub</span>
-                                </a>
+                        <div className={styles.pageHeader}>
+                            <div className="container shape-container d-flex align-items-center py-lg">
+                                <div className="col px-0">
+                                    <div className="row align-items-center justify-content-center">
+                                        <div className="col-lg-6 text-center">
+                                            <h1 className={`${styles.nameTitle} text-white display-1`}>ILEFA Labs</h1>
+                                            <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
+                                                { random(FALLBACK_ACRONYMS) }
+                                            </h2>
+                                            <div className="btn-wrapper mt-4">
+                                            <a href="https://github.com/ilefa" className="btn btn-dark bg-ilefa-dark btn-icon mt-3 mb-sm-0 shine text-lowercase">
+                                                <span className="btn-inner--icon"><i className="fab fa-github"></i></span>
+                                                <span className="btn-inner--text">Visit us on GitHub</span>
+                                            </a>
+                                            {/* <a href="https://ape.ilefa.club" className="btn btn-primary mt-3 mb-sm-0 shine">
+                                                <i className="fab fa-discord"></i>
+                                            </a> */}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
