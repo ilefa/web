@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styling/error.module.css';
 import globalStyles from './styling/home.module.css';
 
 import { Footer, Nav } from '.';
 import { useRouter } from 'next/router';
-import { useLocalStorage } from '../hooks';
 
 export interface ErrorViewProps {
     title: string;
@@ -20,20 +19,11 @@ export const ErrorView: React.FC<ErrorViewProps> = ({ title, message, icon, goBa
             ? <i className={`fa ${icon} fa-fw`}></i>
             : icon
         : <i className="fa fa-times-circle fa-fw"></i>;
-    
-    const [storedTheme, setStoredTheme] = useLocalStorage<ThemeMode>('theme', 'colorful');
-    const [currentTheme, setCurrentTheme] = useState<ThemeMode>(null as any);
-
-    const themeToggler = () => storedTheme === 'colorful'
-        ? setStoredTheme('dark')
-        : setStoredTheme('colorful');
-
-    useEffect(() => setCurrentTheme(storedTheme), [storedTheme]);
 
     return (
         <main>
             <Nav />
-            <div className={`position-relative background-gradient-${currentTheme}`}>
+            <div className="position-relative">
                 <div className={`section section-hero section-shaped background-circuits ${styles.pageFooter}`}>
                     <div className="shape shape-style-3 shape-default"></div>
                     <div className={styles.pageHeader}>

@@ -3,48 +3,48 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './styling/nav.module.css';
 
-import { ThemeMode } from '../pages';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Navbar, UncontrolledCollapse } from 'reactstrap';
 
-export interface NavProps {
-    theme: ThemeMode;
-    themeToggler: () => void;
-}
-
-export const Nav: React.FC<NavProps> = ({ theme, themeToggler }) => {
+export const Nav: React.FC = () => {
     const [classes, setClasses] = useState('');
     const onExiting = () => setClasses('collapsing-out');
     const onExited = () => setClasses('');
 
     const elements = [
         {
-            name: 'home',
             icon: 'fa fa-home',
             href: '/',
+            name: 'Home',
             key: 'home',
             type: 'link',
-            title: true,
-            handler: () => {}
+            title: false
         },
+        {
+            icon: 'fa fa-gavel',
+            href: '/legal',
+            name: 'Legal',
+            key: 'legal',
+            type: 'link',
+            title: false
+        }
         // {
         //     name: 'projects',
         //     icon: 'fa fa-layer-group',
         //     href: '/projects',
         //     key: 'projects'
         // },
-        {
-            name: 'theme toggler',
-            icon: theme === 'colorful'
-                ? 'far fa-moon'
-                : 'fas fa-moon',
-            href: '',
-            key: 'toggler',
-            type: 'action',
-            title: false,
-            handler: useCallback(() => themeToggler(), [themeToggler])
-         }
+        // {
+        //     name: 'theme toggler',
+        //     icon: theme === 'colorful'
+        //         ? 'far fa-moon'
+        //         : 'fas fa-moon',
+        //     href: '',
+        //     key: 'toggler',
+        //     type: 'action',
+        //     handler: useCallback(() => themeToggler(), [themeToggler])
+        //  }
     ];
 
     return (
@@ -95,8 +95,8 @@ export const Nav: React.FC<NavProps> = ({ theme, themeToggler }) => {
                                     <li className="nav-item" key={element.key}>
                                         {
                                             element.type === 'action' && (
-                                                <a className={`nav-link ${styles.navLink}`} onClick={element.handler}>
-                                                    <i className={`${element.icon} fa-fw`}></i>{(isMobile || element.title) && " "}{(isMobile || element.title) && element.name}
+                                                <a className={`nav-link ${styles.navLink}`}>
+                                                    <i className={`${element.icon} fa-fw`}></i>{(isMobile || element.title) && " "} {(isMobile || element.title) && element.name}
                                                 </a>
                                             )
                                         }
@@ -104,7 +104,7 @@ export const Nav: React.FC<NavProps> = ({ theme, themeToggler }) => {
                                             element.type === 'link' && (
                                                 <Link href={element.href}>
                                                     <a className={`nav-link ${styles.navLink}`}>
-                                                        <i className={`${element.icon} fa-fw`}></i> {element.name}
+                                                        <i className={`${element.icon} fa-fw`}></i> {(isMobile || element.title) && element.name}
                                                     </a>
                                                 </Link>
                                             )

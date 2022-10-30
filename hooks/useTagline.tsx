@@ -1,12 +1,9 @@
 import useSWR from 'swr';
 
 export type TaglineResponse = {
-    data: {
-        tagline: string;
-    } | null;
-    isLoading: boolean;
-    isError: boolean;
-    regenerate: () => void;
+    tagline: string | null;
+    loading: boolean;
+    error: boolean;
 }
 
 export const useTagline = (): TaglineResponse => {
@@ -15,17 +12,15 @@ export const useTagline = (): TaglineResponse => {
     const req = useSWR('/api/tagline', fetcher);
 
     if (req.data) return {
-        data: req.data,
-        isLoading: false,
-        isError: false,
-        regenerate: () => req.revalidate()
+        tagline: req.data.tagline,
+        loading: false,
+        error: false
     }
 
     return {
-        data: null,
-        isLoading: !req.data && !req.error,
-        isError: req.error,
-        regenerate: () => req.revalidate()
+        tagline: null,
+        loading: !req.data && !req.error,
+        error: req.error
     }
 
 }

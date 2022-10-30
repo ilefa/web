@@ -1,225 +1,169 @@
 import MdiIcon from '@mdi/react';
 import styles from '../components/styling/home.module.css';
-import workStyles from '../components/styling/work.module.css';
-
-import { useEffect, useState } from 'react';
-import { useLocalStorage, useTagline } from '../hooks';
 
 import {
+    FeaturedWorkCard,
     Footer,
-    IconCardGlyph,
     Nav,
-    Technologies,
-    WorkCard
+    Tagline,
+    WorkCard,
+    WorkCardProps
 } from '../components';
 
 import {
-    mdiHammerWrench,
+    mdiAccountMultiple,
+    mdiCalendar,
+    mdiChartTimelineVariant,
+    mdiHumanGreetingProximity,
     mdiLeaf,
-    mdiPuzzle,
+    mdiLogin,
     mdiSchool,
-    mdiStarThreePointsOutline,
     mdiTableClock,
     mdiVectorUnion
 } from '@mdi/js';
 
-export type ThemeMode = 'colorful' | 'dark';
-
-const FALLBACK_ACRONYMS = [
-    'Ivy League Educated Financial Advisors',
-    'Intricate Legendary Economists of Financial Agencies',
-    'Intellectual Liquidation Earned by Finding Annuity',
-    'ILEFA Loves Economic Forecasting Arbitrage'
-];
-
-type PartialProject = {
+type EnumerableProject = WorkCardProps & {
     key: string;
-    headerText: string;
-    archived?: boolean;
-    description: string;
-    icon?: JSX.Element;
-    link?: string;
-    tech: any[];
 }
 
-const PROJECTS: PartialProject[] = [
+const PROJECTS: EnumerableProject[] = [
     {
-        key: 'cobalt',
-        headerText: 'Cobalt',
-        description: 'A suite of better course tools built by UConn students, for UConn students.',
-        icon: <MdiIcon path={mdiVectorUnion} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
-        link: 'https://cobalt.ilefa.club',
-        tech: [
-            Technologies.TS,
-            Technologies.NEXT
-        ]
+        key: 'uconn-wtf',
+        title: 'uconn.wtf',
+        description: 'Professor and course ratings made for UConn — coming soon.',
+        containerStyle: styles.rowCardTopSpacing,
+        icon: <MdiIcon path={mdiHumanGreetingProximity} size="21px" className={`${styles.workCardIcon} fa-fw`} />,
+        link: '#',
+        hideExtraLink: true
     },
     {
         key: 'snapshots',
-        headerText: 'Snapshots',
+        title: 'Snapshots',
         description: 'The definitive collection of semester-wise data pertaining to UConn.',
-        icon: <MdiIcon path={mdiTableClock} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
+        containerStyle: styles.rowCardSpacing,
+        icon: <MdiIcon path={mdiTableClock} size="21px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://snapshots.ilefa.club',
-        tech: [
-            Technologies.TS,
-            Technologies.NEXT
-        ]
-    },
-    {
-        key: 'foundary',
-        headerText: 'Foundary',
-        description: 'A hyper-customizable task runner equipped for containerized workloads - coming soon.',
-        icon: <MdiIcon path={mdiStarThreePointsOutline} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
-        // link: 'https://foundary.ilefa.club',
-        tech: [
-            Technologies.TS,
-            Technologies.REDIS
-        ]
+        hideExtraLink: true
     },
     {
         key: 'husky',
-        headerText: 'Husky',
+        title: 'Husky',
         description: 'A useful collection of utilities pertaining to various UConn services.',
-        icon: <MdiIcon path={mdiSchool} size="19px" className={`${styles.workCardIcon} fa-fw mr-2`} />,
+        containerStyle: 'mr--1 mt-2',
+        icon: <MdiIcon path={mdiSchool} size="21px" className={`${styles.workCardIcon} fa-fw mr-2`} />,
         link: 'https://github.com/ilefa/husky',
-        tech: [
-            Technologies.TS
-        ]
     },
     {
         key: 'ivy',
-        headerText: 'Ivy',
+        title: 'Ivy',
         description: 'A versatile Discord.js-based TypeScript framework for building Discord bots.',
-        icon: <MdiIcon path={mdiLeaf} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
+        containerStyle: 'ml--3 mt-2',
+        icon: <MdiIcon path={mdiLeaf} size="21px" className={`${styles.workCardIcon} fa-fw`} />,
         link: 'https://github.com/ilefa/ivy',
-        tech: [
-            Technologies.TS,
-            Technologies.REDIS
-        ]
     },
     {
-        key: 'common',
-        headerText: 'Common',
-        description: 'A comprehensive set of various utilities that make writing TypeScript projects easier.',
-        icon: <MdiIcon path={mdiHammerWrench} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
-        link: 'https://github.com/ilefa/common',
-        tech: [
-            Technologies.TS
-        ]
-    },
-    {
-        key: 'donthelpme',
-        headerText: 'donthelpme',
-        description: 'A simple Firefox extension that removes the pesky help button that overlaps test cases in Mimir.',
-        icon: <MdiIcon path={mdiPuzzle} size="19px" className={`${styles.workCardIcon} fa-fw`} />,
-        link: 'https://github.com/ilefa/donthelpme',
-        tech: [
-            Technologies.JS
-        ]
+        key: 'passport-uconn',
+        title: 'UConn SSO Strategy',
+        description: 'A Passport.js authentication strategy allowing integrations with UConn SSO.',
+        containerStyle: 'ml--3 mr--1 mt-2',
+        icon: <MdiIcon path={mdiLogin} size="21px" className={`${styles.workCardIcon} fa-fw mr-2`} />,
+        link: 'https://github.com/ilefa/passport-uconn',
     }
 ]
 
-const random = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
-
-const HomePage = () => {
-    const { data, isLoading, isError, regenerate } = useTagline();
-    const [storedTheme, setStoredTheme] = useLocalStorage<ThemeMode>('theme', 'colorful');
-    const [currentTheme, setCurrentTheme] = useState<ThemeMode>(null as any);
-
-    const themeToggler = () => storedTheme === 'colorful'
-        ? setStoredTheme('dark')
-        : setStoredTheme('colorful');
-
-    useEffect(() => setCurrentTheme(storedTheme), [storedTheme]);
-
-    return (
-        <main>
-            <Nav theme={currentTheme} themeToggler={themeToggler} />
-            <div className={`position-relative background-gradient-${currentTheme}`}>
-                <div className="section section-hero section-shaped background-circuits">
-                    <div className="shape shape-style-3 shape-default"></div>
-                    <div className={styles.pageHeader}>
-                        <div className="container shape-container d-flex align-items-center py-lg">
+const HomePage = () => (
+    <main>
+        <Nav />
+        <div className="position-relative">
+            <div className="section section-hero section-shaped background-storrs">
+                <div className="shape shape-style-3 shape-default"></div>
+                <div className={styles.pageHeader}>
+                    <div className="container shape-container d-flex align-items-center py-lg">
                         <div className="col px-0">
                             <div className="row align-items-center justify-content-center">
-                            <div className="col-lg-6 text-center">
-                                <h1 className={`${styles.nameTitle} text-white display-1`}>ILEFA Labs</h1>
-                                {
-                                    isLoading && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
-                                            <i className="fa fa-spinner fa-spin fa-fw"></i>
-                                        </h2>
-                                    )
-                                }
-                                {
-                                    isError && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase`}>
-                                            { random(FALLBACK_ACRONYMS) }
-                                        </h2>
-                                    )
-                                }
-                                {
-                                    !!data && (
-                                        <h2 className={`${styles.tagline} display-4 font-weight-normal text-white text-lowercase shine cursor`} onClick={regenerate}>
-                                            { data!.tagline }
-                                        </h2>
-                                    )
-                                }
-                                <div className="btn-wrapper mt-4">
-                                <a href="https://github.com/ilefa" className="btn btn-dark bg-ilefa-dark btn-icon mt-3 mb-sm-0 shine text-lowercase">
-                                    <span className="btn-inner--icon"><i className="fab fa-github"></i></span>
-                                    <span className="btn-inner--text">Visit us on GitHub</span>
-                                </a>
+                                <div className="col-lg-6 text-center">
+                                    <img src="/logo.svg" width={150} height={150} />
+                                    <Tagline />
+                                    <div className="btn-wrapper mt-4">
+                                        <a href="https://github.com/ilefa" className="btn btn-dark bg-ilefa-dark btn-icon mt-3 mb-sm-0 shine text-lowercase">
+                                            <span className="btn-inner--icon"><i className="fab fa-github"></i></span>
+                                            <span className="btn-inner--text">Visit us on GitHub</span>
+                                        </a>
+                                        <a href="https://discord.gg/UmVE5VJWsp" className="btn btn-dark bg-ilefa-dark btn-icon mt-3 mb-sm-0 shine text-lowercase">
+                                            <span className="btn-inner--icon"><i className="fab fa-discord"></i></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
-                <section className={`section section-lg ${styles.sectionSeparator} background-circuits`}>
-                    <div className="container" id="body">
-                        <IconCardGlyph 
-                                title="A little about us"
-                                icon="fa fa-user-astronaut"
-                                glyph={'/stonk.svg'}
-                                className={styles.aboutUsCardFix}
-                                content={
+            </div>
+            <section className={`section section-lg ${styles.sectionSeparator} background-storrs`}>
+                <div className="container" id="body">
+                    <h4 className={`text-white ${styles.workTitle}`}>
+                        <i className="fas fa-people-arrows-left-right fa-fw"></i> You might have heard of us
+                        <br /><span className={`text-white ${styles.workTagline}`}>
+                            We are a development organization dedicated to creating software to help students succeed by creating insightful websites, tools, and developer-friendly libraries.
+                        </span>
+                    </h4>
+                    <div className="row">
+                        <div className="col-md-8 align-items-stretch">
+                            <FeaturedWorkCard
+                                title="Cobalt"
+                                link="https://cobalt.lol"
+                                icon={<MdiIcon path={mdiVectorUnion} size="22px" className={`${styles.featuredWorkCardIcon} fa-fw`} />}
+                                description={
                                     <p>
-                                        We are ILEFA - what started as a couple of college freshman interested in the stonk market has become a strong development group focused on creating software that connects people.
+                                        Cobalt is a centralized hub for all things UConn. It provides ease-of-access to a variety of services including searching courses, professor ratings, dining hall menus, room schedules, recreation center occupancy insights, residence hall imagery, and a whole lot more.
                                     </p>
                                 }
-                            />
-                            <div className="mt-7">
-                                <h4 className={`text-white ${styles.workTitle}`}>
-                                    <i className="fa fa-briefcase fa-fw"></i> Our Work
-                                    <br/><span className={`text-white ${styles.workTagline}`}>These are a handful of projects we've worked on</span>
-                                </h4>
-                            </div>
-                            <div className="row-grid align-items-center row">
-                                <div className={`card-deck ${workStyles.cardDeckFlex} ${workStyles.cardDeckTop}`}>
+                                tracking={
+                                    <div className="mt-3">
+                                        <p>
+                                            Currently tracking <b>8,045 courses</b>, <b>4,019 professors</b>, <b>323 classrooms</b>, and more across all of UConn's campuses.
+                                        </p>
+                                    </div>
+                                }
+                                attributeStyles={styles.cobaltBoxSpacing}
+                                attributes={[
                                     {
-                                        PROJECTS.map(project => (
-                                            <WorkCard
-                                                icon={project.icon}
-                                                key={project.key}
-                                                headerText={project.headerText}
-                                                headerColor={'text-primary-light'}
-                                                archived={project.archived}
-                                                description={project.description}
-                                                link={project.link}
-                                                tech={project.tech}
-                                            />
-                                        ))
+                                        name: 'Unique Visitors',
+                                        value: '30K+',
+                                        icon: <MdiIcon path={mdiAccountMultiple} size="17px" className="fa-fw vaTextTop" />
+                                    },
+                                    {
+                                        name: 'Monthly Views',
+                                        value: '80K+',
+                                        icon: <MdiIcon path={mdiCalendar} size="17px" className="fa-fw vaTextTop" />
+                                    },
+                                    {
+                                        name: 'Lifetime Views',
+                                        value: '1M+',
+                                        icon: <MdiIcon path={mdiChartTimelineVariant} size="17px" className="fa-fw vaTextTop" />
                                     }
+                                ]}
+                            />
+                        </div>
+
+                        <div className="col-md-4 ml--3 align-items-stretch">
+                            <WorkCard {...PROJECTS[0]} />
+                            <WorkCard {...PROJECTS[1]} />
+                        </div>
+
+                        {
+                            PROJECTS.slice(2).map(project => (
+                                <div className="col-md-4" key={project.key}>
+                                    <WorkCard {...project} />
                                 </div>
-                            </div>
+                            ))
+                        }
                     </div>
-                </section>
-                <Footer className="background-circuits" white />
-            </div>
-        </main>
-    );
-}
+                </div>
+            </section>
+            <Footer className="bg-dark" white />
+        </div>
+    </main>
+)
 
 export default HomePage;
