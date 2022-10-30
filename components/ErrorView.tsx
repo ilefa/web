@@ -4,7 +4,6 @@ import globalStyles from './styling/home.module.css';
 
 import { Footer, Nav } from '.';
 import { useRouter } from 'next/router';
-import { ThemeMode } from '../pages';
 import { useLocalStorage } from '../hooks';
 
 export interface ErrorViewProps {
@@ -33,7 +32,7 @@ export const ErrorView: React.FC<ErrorViewProps> = ({ title, message, icon, goBa
 
     return (
         <main>
-            <Nav theme={currentTheme} themeToggler={themeToggler} />
+            <Nav />
             <div className={`position-relative background-gradient-${currentTheme}`}>
                 <div className={`section section-hero section-shaped background-circuits ${styles.pageFooter}`}>
                     <div className="shape shape-style-3 shape-default"></div>
