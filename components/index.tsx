@@ -1,8 +1,6 @@
 export * from './ErrorView';
-export * from './FeaturedWorkCard';
 export * from './Footer';
 export * from './Nav';
-export * from './Tagline';
 export * from './WorkCard';
 
 export * from './cards/IconCard';

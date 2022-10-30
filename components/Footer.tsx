@@ -24,10 +24,6 @@ export const Footer: React.FC<FooterProps> = ({ white, noBackground, className }
                             <b>ILEFA Labs</b>
                         </a>
                         {" "} © 2020-{new Date().getFullYear()}{" "}
-                        <br />
-                        <small className="text-muted">
-                            Built with <a className="shine" href="#">@ilefa/composite</a> version 1.0
-                        </small>
                     </div>
                 </div>
                 <div className="col-6">
