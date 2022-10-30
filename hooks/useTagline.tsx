@@ -4,8 +4,8 @@ export type TaglineResponse = {
     data: {
         tagline: string;
     } | null;
-    isLoading: boolean;
-    isError: boolean;
+    loading: boolean;
+    error: boolean;
     regenerate: () => void;
 }
 
@@ -16,15 +16,15 @@ export const useTagline = (): TaglineResponse => {
 
     if (req.data) return {
         data: req.data,
-        isLoading: false,
-        isError: false,
+        loading: false,
+        error: false,
         regenerate: () => req.revalidate()
     }
 
     return {
         data: null,
-        isLoading: !req.data && !req.error,
-        isError: req.error,
+        loading: !req.data && !req.error,
+        error: req.error,
         regenerate: () => req.revalidate()
     }
 
